@@ -1,10 +1,3 @@
-// Actions for Each Button
-// Add one to score
-// Change to color when play to nuber is met
-// Reset options zeros things out
-// Optional: Allow subtraction of points with keypress
-// 
-
 const p1Button = document.querySelector("#p1-button");
 const p2Button = document.querySelector("#p2-button");
 const resetButton = document.querySelector("#reset-button");
@@ -28,7 +21,6 @@ window.addEventListener("keyup", function (e) {
     }
 });
 
-
 // Add one to score
 function addOne(e) { 
     let amount = 0
@@ -39,9 +31,13 @@ function addOne(e) {
     }
 
     if ( e.target.id === "p1-button" ) {
-        p1Score.innerText = parseInt(p1Score.innerText) + amount;
+        if ( parseInt(p1Score.innerText) + amount >= 0 ) {
+            p1Score.innerText = parseInt(p1Score.innerText) + amount;
+        }
     } else if ( e.target.id === "p2-button" ) {
-        p2Score.innerText = parseInt(p2Score.innerText) + amount;
+        if ( parseInt(p2Score.innerText) + amount >= 0 ) {
+            p2Score.innerText = parseInt(p2Score.innerText) + amount;
+        }
     }
     checkWin()   
 }
@@ -50,10 +46,17 @@ function addOne(e) {
 function checkWin() {
     const p1Total = parseInt(p1Score.innerText);
     const p2Total = parseInt(p2Score.innerText);
-    if ( p1Total === parseInt(totalScore.value) || p2Total === parseInt(totalScore.value)  ) {
+    if ( p1Total === parseInt(totalScore.value) ) {
+        p1Score.style.color = "green";
+        p2Score.style.color = "red";
         p1Button.disabled = true;
         p2Button.disabled = true;
-    }
+    } else if (p2Total === parseInt(totalScore.value) ) {
+        p1Score.style.color = "red";
+        p2Score.style.color = "green";
+        p1Button.disabled = true;
+        p2Button.disabled = true;
+    } 
 }
 
 
@@ -62,6 +65,8 @@ function reset() {
     p1Score.innerText = "0";
     p2Score.innerText = "0";
     totalScore.value = 1;
+    p1Score.style.color = "black";
+    p2Score.style.color = "black";
     p1Button.disabled = false;
     p2Button.disabled = false;
 }
