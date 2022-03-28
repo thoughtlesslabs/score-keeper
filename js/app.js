@@ -70,3 +70,6 @@ function reset() {
     p1Button.disabled = false;
     p2Button.disabled = false;
 }
+// Main difference between my code and the example is in the use of variables that run the logic. I tried to tie those directly to the actual elements on the page when it does seem to make it cleaner. ie removes the need to parseInt on the score spans
+
+// Also refactored the code into using player's as objects! This is brilliant and what I should have done.
